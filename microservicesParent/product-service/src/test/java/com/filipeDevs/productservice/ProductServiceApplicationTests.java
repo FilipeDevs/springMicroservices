@@ -5,6 +5,7 @@ import com.filipeDevs.productservice.dto.ProductRequest;
 import com.filipeDevs.productservice.repository.ProductRepository;
 import com.filipeDevs.productservice.service.ProductService;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -49,6 +50,12 @@ class ProductServiceApplicationTests {
 		dynamicPropertyRegistry.add("spring.data.mongodb.uri", mongoDBContainer::getReplicaSetUrl);
 
 	}
+
+	@BeforeEach
+	void cleanDatabase() {
+		productRepository.deleteAll();
+	}
+
 
 	@Test
 	void shouldCreateProduct() throws Exception {
