@@ -1,9 +1,12 @@
 package com.filipeDevs.inventoryservice.controller;
 
+import com.filipeDevs.inventoryservice.dto.InventoryResponse;
 import com.filipeDevs.inventoryservice.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/inventory")
@@ -12,9 +15,9 @@ public class InventoryController {
 
     private final InventoryService inventoryService;
 
-    @GetMapping("/{scanCode}")
+    @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public boolean isInStock(@PathVariable String scanCode) {
+    public List<InventoryResponse> isInStock(@RequestParam List<String> scanCode) {
         return inventoryService.isInStock(scanCode);
     }
 }
