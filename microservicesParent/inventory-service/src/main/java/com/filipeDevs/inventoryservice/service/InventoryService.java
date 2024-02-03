@@ -19,11 +19,13 @@ public class InventoryService {
     private final InventoryRepository inventoryRepository;
 
     @Transactional(readOnly = true)
-    @SneakyThrows
     public List<InventoryResponse> isInStock(List<String> scanCode) {
-        log.info("Wait started");
-        Thread.sleep(10000);
-        log.info("Wait ended");
+        // Some simulation for testing time limiter and retry of the circuit breaker
+        //        log.info("Wait started");
+        //        Thread.sleep(10000);
+        //        log.info("Wait ended");
+
+
         // Find all inventories from the list of the product's scanCode
         // and check if the inventory of the product still has stock
         return inventoryRepository.findByScanCodeIn(scanCode)
